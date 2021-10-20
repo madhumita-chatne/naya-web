@@ -1,0 +1,28 @@
+steps:
+  # 2-stage docker build
+  - name: gcr.io/cloud-builders/docker
+    entrypoint: "bash"
+    args:
+      ['-c', 'docker build -t gcr.io/$PROJECT_ID/multiplayer:${SHORT_SHA} .'
+      ]
+  # push latest docker build
+  - name: 'gcr.io/cloud-builders/docker'
+    args: ['push', 'gcr.io/$PROJECT_ID/multiplayer']
+  # deploy latest docker build
+  - name: 'gcr.io/cloud-builders/gcloud'
+    args:
+      [
+        'beta',
+        'run',
+        'deploy',
+        'multiplayer',
+        '--image',
+        'gcr.io/$PROJECT_ID/multiplayer:${SHORT_SHA}',
+        '--region',
+        'us-east1',
+        '--platform',
+        'managed',
+      ]
+timeout: 900s
+images:
+  - 'gcr.io/$PROJECT_ID/multiplayer'
