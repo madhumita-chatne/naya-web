@@ -8,6 +8,7 @@ COPY package.json package.json
 # creates production build of product
 COPY src/ src/
 COPY public/ public/
+RUN npm install
 RUN npm run build
 
 # Second Stage

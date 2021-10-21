@@ -3,11 +3,11 @@ steps:
   - name: gcr.io/cloud-builders/docker
     entrypoint: "bash"
     args:
-      ['-c', 'docker build -t gcr.io/$PROJECT_ID/multiplayer:${SHORT_SHA} .'
+      ['-c', 'docker build -t gcr.io/$PROJECT_ID/multiplayer-test-frontend:${SHORT_SHA} .'
       ]
   # push latest docker build
   - name: 'gcr.io/cloud-builders/docker'
-    args: ['push', 'gcr.io/$PROJECT_ID/multiplayer']
+    args: ['push', 'gcr.io/$PROJECT_ID/multiplayer-test-frontend']
   # deploy latest docker build
   - name: 'gcr.io/cloud-builders/gcloud'
     args:
@@ -15,9 +15,9 @@ steps:
         'beta',
         'run',
         'deploy',
-        'multiplayer',
+        'multiplayer-test-frontend',
         '--image',
-        'gcr.io/$PROJECT_ID/multiplayer:${SHORT_SHA}',
+        'gcr.io/$PROJECT_ID/multiplayer-test-frontend:${SHORT_SHA}',
         '--region',
         'us-east1',
         '--platform',
@@ -25,4 +25,4 @@ steps:
       ]
 timeout: 900s
 images:
-  - 'gcr.io/$PROJECT_ID/multiplayer'
+  - 'gcr.io/$PROJECT_ID/multiplayer-test-frontend'
