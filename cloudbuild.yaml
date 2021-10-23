@@ -23,6 +23,5 @@ steps:
         '--platform',
         'managed',
       ]
-timeout: 900s
 images:
   - 'gcr.io/$PROJECT_ID/multiplayer-test-frontend'
