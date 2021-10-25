@@ -18,7 +18,8 @@
     "react-sketch": "^0.5.1",
     "reactstrap": "^8.10.0",
     "socket.io-client": "^4.3.2",
-    "web-vitals": "^2.1.2"
+    "web-vitals": "^2.1.2",
+    "whatwg-url": "^11.0.0"
   },
   "scripts": {
     "start": "react-scripts start",
